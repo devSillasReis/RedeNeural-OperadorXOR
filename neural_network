@@ -1,0 +1,29 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+"""
+Created on Tue Aug  4 11:58:59 2020
+
+@author: sillas_reis
+"""
+### Rede nelral multicamada desenvolvida para predizer o operador XOR
+
+import numpy as np
+
+# Entradas e respectivas saídas esperadas para o operador XOR
+entradas = np.array([[0,0],
+                     [0,1],
+                     [1,0],
+                     [1,1]])
+
+respostas = np.array([[0],
+                      [1],
+                      [1],
+                      [0]])
+
+# Iniciando pesos aleatórios para camadas de entrada e oculta
+pesos0 = 2 * np.random.random((2,3)) - 1
+pesos1 = 2 * np.random.random((3,1)) - 1
+
+# Definição da taxa de aprendizagem e épocas para repetição
+taxa_aprendizagem = 0.4
+epocas = 10
