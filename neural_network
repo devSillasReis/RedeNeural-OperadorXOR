@@ -34,3 +34,14 @@ pesos1 = 2 * np.random.random((3,1)) - 1
 # Definição da taxa de aprendizagem e épocas para repetição
 taxa_aprendizagem = 0.4
 epocas = 10
+
+# Ciclo de treinamento
+for _ in range(epocas):
+    # Obtendo resultado para cada registro com a ativação do produto escalar 
+    # dos neurônios pelos pesos 
+    camada_oculta = ativacao_sigmoid(entradas.dot(pesos0))
+    camada_saida = ativacao_sigmoid(camada_oculta.dot(pesos1))
+    
+    # Calculando erro médio absoluto
+    media_erro = np.mean(np.abs(respostas - camada_saida))
+    
