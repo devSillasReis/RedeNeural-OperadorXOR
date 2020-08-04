@@ -33,22 +33,30 @@ pesos1 = 2 * np.random.random((3,1)) - 1
 
 # Definição da taxa de aprendizagem e épocas para repetição
 taxa_aprendizagem = 0.4
-epocas = 10
+epocas = 1000000
 
 # Ciclo de treinamento
 for _ in range(epocas):
     # Obtendo resultado para cada registro com a ativação do produto escalar 
     # dos neurônios pelos pesos 
-    camada_oculta = ativacao_sigmoid(entradas.dot(pesos0))
-    camada_saida = ativacao_sigmoid(camada_oculta.dot(pesos1))
+    camada_oculta = ativacao_sigmoid(np.dot(entradas, pesos0))
+    camada_saida = ativacao_sigmoid(np.dot(camada_oculta, pesos1))
     
     # Calculando erro médio absoluto
-    media_erro = np.mean(np.abs(respostas - camada_saida))
+    erro = respostas - camada_saida
+    media_erro = np.mean(np.abs(erro))
+    print(f'Erro: {media_erro}')
     
     # Derivando as ativações
     derivada_saida = derivada_sigmoid(camada_saida)
     derivada_oculta = derivada_sigmoid(camada_oculta)
     
     # Calculando valor de delta
-    delta_saida = media_erro * derivada_saida
+    delta_saida = erro * derivada_saida
     delta_oculta = delta_saida.dot(pesos1.T) * derivada_oculta
+    
+    # Ajustando pesos --> peso = peso + (entrada * delta * taxaAprendizagem)
+    pesos1 = pesos1 + camada_oculta.T.dot(delta_saida) * taxa_aprendizagem
+    pesos0 = pesos0 + entradas.T.dot(delta_oculta) * taxa_aprendizagem
+    
+    
