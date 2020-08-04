@@ -9,6 +9,13 @@ Created on Tue Aug  4 11:58:59 2020
 
 import numpy as np
 
+# Função de ativação e deriavda
+def ativacao_sigmoid(n):
+    return 1/(1+np.exp(-n))
+
+def derivada_sigmoid(sig):
+    return sig*(1-sig)
+
 # Entradas e respectivas saídas esperadas para o operador XOR
 entradas = np.array([[0,0],
                      [0,1],
