@@ -45,3 +45,10 @@ for _ in range(epocas):
     # Calculando erro médio absoluto
     media_erro = np.mean(np.abs(respostas - camada_saida))
     
+    # Derivando as ativações
+    derivada_saida = derivada_sigmoid(camada_saida)
+    derivada_oculta = derivada_sigmoid(camada_oculta)
+    
+    # Calculando valor de delta
+    delta_saida = media_erro * derivada_saida
+    delta_oculta = delta_saida.dot(pesos1.T) * derivada_oculta
